@@ -15,17 +15,17 @@ def extract_data(dict_data):
             items_list = cards_dict["card"]["card"]["gridElements"]["infoWithStyle"]["items"]
             for items_dict in items_list:
                 product_dict = {}
-                product_dict["Product Name"] = items_dict["displayName"]
-                product_dict["Product ID"] = items_dict["productId"]
-                product_dict["Product Price"] = float(items_dict["variations"][0]["price"]["offerPrice"]["units"])
-                product_dict["Product quantity"] = str(items_dict["variations"][0]["quantityDescription"])
-                product_dict["Product Image Url"] = [swiggy_base_url + url for url in items_dict["variations"][0]["imageIds"]]
+                product_dict["product_name"] = items_dict["displayName"]
+                product_dict["product_id"] = items_dict["productId"]
+                product_dict["price"] = float(items_dict["variations"][0]["price"]["offerPrice"]["units"])
+                product_dict["quantity"] = str(items_dict["variations"][0]["quantityDescription"])
+                product_dict["image_url"] = [swiggy_base_url + url for url in items_dict["variations"][0]["imageIds"]]
                 Discount = items_dict["variations"][0]["price"]["offerApplied"]["listingDescription"].split("%")
                 for num in Discount:
                     if num.isdigit():
                         Discount = int(num)
-                product_dict["Discount percentage"] = Discount
-                product_dict["Product Mrp"] = float(items_dict["variations"][0]["price"]["mrp"]["units"])
+                product_dict["discount_percentage"] = Discount
+                product_dict["product_mrp"] = float(items_dict["variations"][0]["price"]["mrp"]["units"])
                 product_dict["is_available"] = items_dict["isAvail"]
                 swiggy_data.append(product_dict)
     print(swiggy_data)
